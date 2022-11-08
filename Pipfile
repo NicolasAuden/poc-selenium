@@ -1,0 +1,17 @@
+[[source]]
+name = "pip-application"
+url = "url of your project"
+verify_ssl = false
+
+[dev-packages]
+
+[packages]
+requests = "*"
+PyYaml = "*"
+selenium = "*"
+pytest = "*"
+pytest-html = "*"
+PyUnitReport = "*"
+
+[requires]
+python_version = "latest"

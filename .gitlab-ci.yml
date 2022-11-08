@@ -1,0 +1,27 @@
+variables:
+  NO_PROXY: ''
+image: images/python:latest
+
+stages:
+  - selenium
+  - report
+
+.before_script:
+  before_script:
+  - python3 -m pip install pipenv
+  - pipenv lock --requirements > /tmp/requirements.txt
+  - python3 -m pip install -r /tmp/requirements.txt
+
+Selenium:
+  extends: .before_script
+  stage: selenium
+  script: 
+    - pytest --junitxml=report.xml main.py
+  artifacts:
+    when: always
+    paths:
+      - screenshot.png
+      - report.xml
+    expire_in: 1 week
+    reports:
+      junit: report.xml
